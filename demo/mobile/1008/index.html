@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<meta name="viewport" content="initial-scale=1">
+<style>
+html,body{ padding: 0; margin: 0; height:100%; font-family:"微软雅黑";}
+img{ width:100%;}
+.game-wrap{margin: 0px auto; background-color: rgb(44,48,81); width:20rem; height:100%;}
+.initial-page,.game-box,.game-layer{ width:100%; height:100%; overflow:hidden; position:relative; background-color: rgb(44,48,81);}
+.game-icon{
+	overflow:hidden; margin-top:3.75rem;
+}
+.game-desc,.game-layer .result{
+	font-size:1rem; color:#fff; text-align:center; position:absolute; left:0; top:50%;
+	margin-top:-0.5rem; width:100%;
+}
+.game-start{
+	width:12rem; height:3.125rem; position:absolute; left:50%; bottom:8.125rem; margin-left:-6rem;
+	color:#fff; line-height:3.125rem;font-size:1.6875rem; text-align:center; cursor:pointer;
+	border-radius:0.875rem; background-color:#ff515a; 
+}
+.game-box{ display:none;}
+.time,.chance{
+	position:absolute; top:1.375rem; font-size:1rem; color:#af9164;
+}
+.time{ left:2.375rem;}
+.chance{ right:2.375rem;}
+.question{ text-align:center; font-size:8.75rem; color:#fff; margin-top:5rem;}
+.anwser{
+	position:absolute; width:14.1625rem; overflow:hidden; bottom:1.25rem;
+	left:50%; margin-left:-7.03125rem;
+}
+.anwser span{
+	display:block; float:left; width:4.15625rem; height:4.15625rem; border:1px solid #383d68;
+	background-color:#34385f; border-radius:2px; margin:0.21875rem; line-height:4.15625rem;
+	text-align:center; font-size:3rem; cursor:pointer;
+}
+.anwser span.error{
+	border:1px solid #f00;
+}
+.game-layer{
+	position:absolute; left:0; top:0; display:none;
+}
+.game-layer .result{
+	top:40%;
+}
+.game-layer .score{
+	margin:0px 10px;
+}
+.game-layer .restart,.game-layer .rank{
+	position:absolute; bottom:5rem; color:#fff; width:6.875rem; height:2.5rem; line-height:2.5rem;
+	background-color:#ff515a; text-align:center; font-size:1rem; overflow:hidden; border-radius:10px;
+}
+.game-layer .restart{
+	left:1.875rem;
+}
+.game-layer .rank{
+	right:1.875rem;
+}
+</style>
+</head>
+<body>
+<div class="game-wrap">
+    <div class="initial-page">
+        <div class="game-icon"><img src="images/title.jpg"></div>
+        <div class="game-desc">根据上面字的颜色从下面选择正确的字</div>
+        <div class="game-start">立即开始</div>
+    </div>
+    <div class="game-box">
+    </div>
+    <div class="game-layer">
+    	<div class="result">您的得分<span class="score">12</span>分</div>
+        <div class="restart">再玩一次</div>
+        <div class="rank">查看排行</div>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="jquery-1.8.2.min.js"></script>
+<script>
+var game;
+$(function(){
+	setFontSize();
+	game = new Game(".game-box");
+	$(".game-start").click(function(){
+		$(".initial-page").hide();
+		$(".game-box").show();
+		game.init();
+	})
+})
+//设置字体
+function setFontSize(){
+	window.fontsize = $(window).width()/20;
+	if(fontsize<16){ fontsize = 16; }
+	if(fontsize>32){ fontsize = 32; }
+	$("html").css("font-size",fontsize+"px");
+}
+
+function Game(id){
+	this.container = $(id);
+	this.color = ["#ffffff","#2ddb61","#fe3d47","#9a52fc","#ffcc00","#0ca1ff"];
+	this.words = ["白","绿","红","紫","黄","蓝"];
+	this.level = 1;
+	this.totalTime = 30;
+	this.time = 0;
+	this.chance = 3;
+	this.error = 0;
+	this.score = 0;
+}
+//初始化
+Game.prototype.init = function(){
+	var content = [];
+		content.push('<div class="time">时间：'+ this.totalTime +'</div>');
+		content.push('<div class="chance">机会：'+ this.chance +'</div>');
+		content.push('<div class="question"></div>');
+		content.push('<div class="anwser"></div>');
+	this.container.html(content.join(""));
+	this.time = 0;
+	this.error = 0;
+	this.score = 0;
+	clearInterval(this.timer);
+	this.timer = null;
+	this.start();
+}
+//开始游戏
+Game.prototype.start = function(){
+	this.setScene();
+	this.bindEvent();
+	this.countDown();
+}
+//设置游戏场景
+Game.prototype.setScene = function(){
+	this.setQuestion();
+	this.setAnwser();
+}
+//设置问题
+Game.prototype.setQuestion = function(){
+	var color = this.color[parseInt(Math.random()*6)],
+		word = this.words[parseInt(Math.random()*6)];
+	this.anwser = this.words[this.color.indexOf(color)];
+	this.container.find(".question").html("<span style='color:"+ color +";'>"+ word +"</span>");
+}
+//设置答案
+Game.prototype.setAnwser = function(){
+	//var _color = this.color.concat([]).sort(function(){return Math.random()*1 > 0.5;});
+	//var _words = this.words.concat([]).sort(function(){return Math.random()*1 > 0.5;});
+	var _color = RandomSort(this.color);
+	var _words = RandomSort(this.words);
+	
+	var anwser = "";
+	_words.map(function(items,index){
+			anwser += '<span style="color:'+ _color[index] +';">'+ items +'</span>';
+		});
+	this.container.find(".anwser").html(anwser);
+	
+}
+//倒计时
+Game.prototype.countDown = function(){
+	var self = this;
+	this.timer = setInterval(function(){
+		if(self.time==30){
+			self.gameover();
+		}else{
+			self.time++;
+			self.container.find(".time").html("时间："+(self.totalTime - self.time));
+		}	
+	},1000);
+}
+//游戏结束
+Game.prototype.gameover = function(){
+	clearInterval(this.timer);
+	this.timer = null;
+	this.layer();
+}
+//事件绑定
+Game.prototype.bindEvent = function(){
+	var device = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
+	var clickEvtName = device ? 'touchstart' : 'mousedown';
+	var moveEvtName = device? 'touchmove': 'mousemove';
+	var endEvtName = device? 'touchend': 'mouseup';
+	
+	
+	var span = this.container.find(".anwser span");
+	var self = this;
+	span.die(endEvtName).live(endEvtName,function(){
+		var word = $(this).text();
+		//console.log(self.anwser,word);
+		if(self.anwser === word){
+			self.setScene();
+			self.score++;
+			return;
+		}else{
+			$(this).addClass("error");
+			self.error++;
+			self.container.find(".chance").html('机会：'+ (self.chance - self.error) );
+			if(self.error==3){
+				self.gameover();
+				return;
+			}else{
+				setTimeout(function(){
+					self.setScene(); 
+				},200);
+			}
+		}
+	});
+	
+	$(".restart").live(endEvtName,function(){
+		$(".game-layer").hide();
+		//game = new Game(".game-box");
+		game.init();
+	});
+	$(".rank").on(endEvtName,function(){
+		alert("暂无排行");
+		return;
+	})
+	
+}
+//结束提示
+Game.prototype.layer = function(){
+	$(".game-layer").show();
+	$(".game-layer .score").html(this.score);
+}
+
+function RandomSort(arr){
+	var _arr = arr.concat([]);
+	for(var i=0;i< _arr.length;i++){
+		var t = _arr[i],m = parseInt(Math.random()*_arr.length);
+		_arr[i] = _arr[m];
+		_arr[m] = t;
+	}
+	return _arr;
+}
+</script>

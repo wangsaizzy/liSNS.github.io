@@ -1,0 +1,186 @@
+@charset "utf-8";
+/* CSS Document */
+#tools{
+	width:60px; height:248px; position:fixed; right:10px; top:50%; z-index:999;
+	margin-top:-150px; box-shadow:0px 2px 2px 2px rgba(0,0,0,.3); background-color:rgba(255,255,255,.2);
+}
+#tools li{
+	width:60px; height:49px; border-bottom:1px solid rgba(0,0,0,.3);
+}
+#tools li:hover{
+	 background-color:rgba(255,255,255,.5);
+}
+#tools li:last-child{
+	border-bottom:none;
+}
+#tools li a{
+	display:block; width:100%; height:100%; background-repeat:no-repeat; background-position:center center;
+}
+#tools li a.icon1{
+	background-image:url(../images/icons/icon1.png);
+}
+#tools li a.icon2{
+	background-image:url(../images/icons/icon2.png);
+}
+#tools li a.icon3{
+	background-image:url(../images/icons/icon3.png);
+}
+#tools li a.icon4{
+	background-image:url(../images/icons/icon4.png);
+}
+#tools li a.icon5{
+	background-image:url(../images/icons/icon5.png);
+}
+#tools li a.icon6{
+	background-image:url(../images/icons/icon6.png);
+}
+
+
+.change-bgimg{
+	display:inline-block; position:absolute; top:-84px; right:-120px; background-color:rgba(255,255,255,.3);
+	box-shadow:-2px 0px 2px 2px rgba(0,0,0,.3); padding:10px; opacity:0;
+	-webkit-transition:all ease-in .2s; -moz-transition:all ease-in .2s;
+	-ms-transition:all ease-in .2s; -o-transition:all ease-in .2s;
+}
+#tools li.cur .change-bgimg{
+	opacity:1; right:60px;
+}
+.change-bgimg span{
+	display:block; width:100px; height:60px; border:2px solid #fff; overflow:hidden; cursor:pointer;
+}
+.change-bgimg span:hover{
+	border:2px solid #3ac0e6;
+}
+.change-bgimg span.cur{
+	border:2px solid #28c7a7;
+}
+.change-bgimg span img{
+	width:100%; height:100%;
+}
+
+
+#tools li .progress{
+	display:block; position:absolute; left:0px; bottom:0px; width:0%; height:1px; background-color:#28c7a7;
+}
+#tools li.cur .music-box{
+	opacity:1; right:60px;
+}
+.music-box{
+	display:inline-block; position:absolute; top:0px; right:-340px;/* background-color:rgb(255,255,255);*/
+	box-shadow:-2px 0px 2px 2px rgba(0,0,0,.3); padding:3px; opacity:0; width:340px;
+	-webkit-transition:all ease-in .2s; -moz-transition:all ease-in .2s;
+	-ms-transition:all ease-in .2s; -o-transition:all ease-in .2s;
+}
+.music-box > div{
+	color:rgb(20,171,87); cursor:pointer;
+	height: 48px; line-height:48px; position:relative;
+	background-color:rgba(255,255,255,.9) !important;
+}
+.music-box > div:hover,.music-box > div.cur{
+	background-color:rgba(20,171,87,.9) !important; color:#fff;
+}
+.music-box > div span:first-child{
+	display:inline-block; height:30px; width:300px; overflow:hidden; text-indent:7px;
+}
+.music-box > div span.icon{ width:32px; position:absolute; height:20px; right:0px; top:12px;}
+.music-box > div span.icon em{
+	display:none; width:3px; height:20px; background-color:rgb(20,171,87);
+	position:absolute; bottom:0px;
+}
+.music-box > div.cur span.icon em{
+	background-color:rgb(255,255,255); display:block;
+	-webkit-animation-fill-mode: both;
+	-moz-animation-fill-mode: both;
+	-ms-animation-fill-mode: both;
+	-o-animation-fill-mode: both;
+}
+.music-box > div.cur span.icon em:first-child{
+	left:0px;
+	-webkit-animation: move1 1s infinite ease-in-out;
+	-moz-animation: move1 1s infinite ease-in-out;
+	-ms-animation: move1 1s infinite ease-in-out;
+	-o-animation: move1 1s infinite ease-in-out;
+}
+.music-box > div.cur span.icon em:nth-child(2){
+	left:7px;
+	-webkit-animation: move2 .6s infinite ease-in-out;
+	-moz-animation: move2 .6s infinite ease-in-out;
+	-ms-animation: move2 .6s infinite ease-in-out;
+	-o-animation: move2 .6s infinite ease-in-out;
+}
+.music-box > div.cur span.icon em:nth-child(3){
+	left:14px;
+	-webkit-animation: move3 .8s infinite ease-in-out;
+	-moz-animation: move3 .8s infinite ease-in-out;
+	-ms-animation: move3 .8s infinite ease-in-out;
+	-o-animation: move3 .8s infinite ease-in-out;
+}
+.music-box > div.cur span.icon em:last-child{
+	left:21px;
+	-webkit-animation: move4 1s infinite ease-in-out;
+	-moz-animation: move4 1s infinite ease-in-out;
+	-ms-animation: move4 1s infinite ease-in-out;
+	-o-animation: move4 1s infinite ease-in-out;
+}
+@-webkit-keyframes move1{
+	0%{ height:5px;}
+	50%{ height:10px;}
+	100%{ height:5px;}
+}
+@-webkit-keyframes move2{
+	0%{ height:8px;}
+	50%{ height:20px;}
+	100%{ height:8px;}
+}
+@-webkit-keyframes move3{
+	0%{ height:5px;}
+	50%{ height:15px;}
+	100%{ height:5px;}
+}
+@-webkit-keyframes move4{
+	0%{ height:4px;}
+	50%{ height:15px;}
+	100%{ height:4px;}
+}
+
+@-moz-keyframes move1{
+	0%{ height:5px;}
+	50%{ height:10px;}
+	100%{ height:5px;}
+}
+@-moz-keyframes move2{
+	0%{ height:8px;}
+	50%{ height:20px;}
+	100%{ height:8px;}
+}
+@-moz-keyframes move3{
+	0%{ height:5px;}
+	50%{ height:15px;}
+	100%{ height:5px;}
+}
+@-moz-keyframes move4{
+	0%{ height:4px;}
+	50%{ height:15px;}
+	100%{ height:4px;}
+}
+@-o-keyframes move1{
+	0%{ height:5px;}
+	50%{ height:10px;}
+	100%{ height:5px;}
+}
+@-o-keyframes move2{
+	0%{ height:8px;}
+	50%{ height:20px;}
+	100%{ height:8px;}
+}
+@-o-keyframes move3{
+	0%{ height:5px;}
+	50%{ height:15px;}
+	100%{ height:5px;}
+}
+@-o-keyframes move4{
+	0%{ height:4px;}
+	50%{ height:15px;}
+	100%{ height:4px;}
+}
+
