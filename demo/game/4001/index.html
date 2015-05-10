@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="css/helper.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="the_step_box">
+    <div class="physical_examination"> 
+        <div class="physical_examination_control">
+            <div class="control_score level1">
+                <div class="control_score_turn"></div>
+                <div class="control_score_num"> <b>100</b>分 </div>
+            </div>
+            <div class="control_progress">
+                <div class="control_progress_top">正在进行优化 请稍候...</div>
+                <div class="control_progress_bar">
+                    <div class="progress_bar_animate lv1">
+                        <div class="progress_bar_line"> 
+                        <span class="lv_green" style="left:32px;"></span> 
+                        <span class="lv_green" style="left:118px;"></span> 
+                        <span class="lv_green" style="left:204px;"></span> 
+                        <span class="lv_green" style="left:290px;"></span> 
+                        <span class="lv_green" style="left:376px;"></span>
+                    </div>
+                </div>
+                <div class="progress_sm"> 
+                    <span style=" margin-left:10px;">发动机检测</span> 
+                    <span style=" margin-left:33px;">燃油系统</span> 
+                    <span style=" margin-left:38px;">制动系统</span> 
+                    <span style=" margin-left:33px;">变速箱系统</span> 
+                    <span style=" margin-left:30px;">空调系统</span> 
+                </div>
+          </div>
+            </div>
+        </div>
+        <div class="physical_examination_list"> 
+            <div class="phy_result_info">
+                <div class="phy_result_info_title"> 
+                    <span class="test_pro">检测项目</span> 
+                    <span class="replace_pro">更换项目</span> 
+                    <span class="replace_percent">同车型更换率</span> 
+                    <span class="state_now">当前状态</span> 
+                </div>
+                <div class="phy_result_info_list">
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>      
+<br />                        
+<button>点击试试看</button>
+</body>
+</html>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/cmy.method.js"></script>
+<script type="text/javascript">
+$(function(){
+
+	function LetsRoll(){
+		if(CMY.Phyfinish){
+			CMY.Phyfinish = false;
+			CMY.PhysicalExam();
+		}
+	}
+	//自定义最终显示结果
+	CMY.TheEnd = function(){
+		var score = parseInt($(".control_score_num").find("b").html());
+		score = (score>=80) ? "健康" : (score>=60) ? "良好" : "严重";
+		$(".physical_short span").eq(0).attr("style","").addClass("col_cd0200").html(score);
+	}
+	
+	$("button").click(function(){
+		LetsRoll();
+		})
+});
+
+</script> 

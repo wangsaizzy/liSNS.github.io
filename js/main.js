@@ -76,8 +76,9 @@ function ShowNotEmpty(){
 }
 /* 分类模块列表显示操作 */
 function ShowDemoList(){
-	var dialog = ["divcss","game","javascript"],
+	var dialog = ["divcss","tool","website"],
 		mobile = "mobile";
+		app ="app";
 	/*MoudleList.bool = dialog.indexOf(MoudleList.key)>= 0;
 	MoudleList.singlePageCount = MoudleList.bool ? 6 : 12;
 	MoudleList.currentPage = 0;
@@ -87,7 +88,7 @@ function ShowDemoList(){
 	MoudleList.handle();*/
 	
 	
-	var type = dialog.indexOf(MoudleList.key)>= 0 ? "demo" : (MoudleList.key==mobile ? mobile : "diary");
+	var type = dialog.indexOf(MoudleList.key)>= 0 ? "demo" : (MoudleList.key==mobile,app ? mobile : "diary");
 	MoudleList.singlePageCount = (type =="demo") ? 6 : (type==mobile)? 3 : 12;
 	MoudleList.currentPage = 0;
 	MoudleList.totalPage = Math.ceil(BaseData[MoudleList.key].length/MoudleList.singlePageCount)-1;
@@ -112,9 +113,8 @@ function ShowMobileDemo(){
 			title = items.name,dec = items.desc_s;
 		DomLi.push("<li>");
 		DomLi.push("<iframe src='"+ items.weblink +"'></iframe>");
-		DomLi.push("<a class='viewdemo' target='_blank' href='"+ items.weblink +"'>viewdemo");
-		DomLi.push("<a class='download' href='"+ items.id +".rar'>download</a>");
-		DomLi.push("</li>");
+		DomLi.push("<a class='viewdemo' target='_blank' href='"+ url+items.weblink +"'>viewdemo");
+		DomLi.push("<span class='qr_code'><img src='"+ url +"qrcode.png' /></span></a>");
 	}
 	setTimeout(function(){
 		$(".demo-list").html(DomLi.join("")).hide().fadeIn(300);
@@ -130,12 +130,10 @@ function ShowCurrentListDemo(){
 		var items = list_arr[i],url = "demo/"+ items.key +"/"+ items.id +"/",
 			title = items.name,dec = items.desc_s;
 		DomLi.push("<li>");
-		DomLi.push("<a target='_blank' href='"+items.weblink +"'>");
-		DomLi.push("<img src='"+ items.pic +"' alt='"+ title +"' />");
+		DomLi.push("<a target='_blank' href='"+ items.weblink +"'>");
+		DomLi.push("<img src='"+ url+ items.pic +"' alt='"+ title +"' />");
 		DomLi.push("</a>");
 		DomLi.push("<div class='info'><h2>"+ title +"</h2><span>"+ dec +"</span></div>");
-		DomLi.push("<a class='download' target='_blank' href='"+ url +items.id +".rar'>download</a>");
-		DomLi.push("</li>");
 	}
 	setTimeout(function(){
 		
@@ -155,10 +153,10 @@ function ShowCurrentListDiary(){
 			title = items.name,file = items.file;
 		DomLi.push("<li>");
 		if(items.weblink){
-			DomLi.push("<a target='_blank' href='"+ url + items.weblink +"'>"+ title +"");
+			DomLi.push("<a target='_blank' href='"+  items.weblink +"'>"+ title +"");
 		}
 		else{
-			DomLi.push("<a data-path='"+ url + file +"' href='javascript:void(0);'>"+ title +"");
+			DomLi.push("<a data-path='"+  file +"' href='javascript:void(0);'>"+ title +"");
 		}
 		DomLi.push("</li>");
 	}
@@ -239,7 +237,7 @@ function CheckLocation(){
 			clearInterval(Timer);
 			Timer = null;
 
-			var dialog = ["divcss","game","javascript","mobile"];
+			var dialog = ["divcss","tool","website","mobile","app"];
 			if(dialog.indexOf(paramObj.key)>=0){
 				ShowDemoStart();
 			}else{

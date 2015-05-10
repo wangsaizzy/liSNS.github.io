@@ -40,7 +40,7 @@
 }
 
 #nav .photo{
-	width:48px; height:48px; border-radius:48px; border:1px solid #28c7a7; overflow:hidden;
+	width:48px; height:48px; border-radius:48px;overflow:hidden;
 	float:right; margin:3px;
 }
 #nav .photo img{

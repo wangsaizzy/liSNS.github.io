@@ -1,0 +1,210 @@
+@charset "utf-8";
+/* CSS Document */
+@font-face {
+font-family: 'qingshu';
+src: url('../font/qingshu.otf');
+font-weight:normal;
+}
+html{font-size:62.5%; }
+body{
+	background:url(../images/background/21.jpg); background-size:cover;
+}
+.message-wall{ width:96%; padding:2%; position:relative;}
+.note h2{
+  font-size:160%; text-align:right; font-weight:normal;
+}
+.note p{
+  font-size:180%; padding:0; margin:0; display:block; word-break:break-all; font-weight:normal;
+}
+.note{
+  text-decoration:none; color:#fff; background:#ffc; display:block; position:relative;
+  height:170px; width:165px; padding:10px; float:left; margin:0px 10px 10px;
+  -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);
+  -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+  box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+  -moz-transition:-moz-transform .15s linear;
+  -o-transition:-o-transform .15s linear;
+  -webkit-transition:-webkit-transform .15s linear;
+}
+.note{
+  -webkit-transform: rotate(-6deg);
+  -o-transform: rotate(-6deg);
+  -moz-transform:rotate(-6deg);
+}
+.note.rotate1{
+  -o-transform:rotate(4deg);
+  -webkit-transform:rotate(4deg);
+  -moz-transform:rotate(4deg);
+}
+/*.note:nth-child(even){
+  -o-transform:rotate(4deg);
+  -webkit-transform:rotate(4deg);
+  -moz-transform:rotate(4deg);
+}*/
+/*.note:nth-child(3n){
+  -o-transform:rotate(-3deg);
+  -webkit-transform:rotate(-3deg);
+  -moz-transform:rotate(-3deg);
+}*/
+.note.rotate2{
+  -o-transform:rotate(-3deg);
+  -webkit-transform:rotate(-3deg);
+  -moz-transform:rotate(-3deg);
+}
+.note.rotate3{
+  -o-transform:rotate(5deg);
+  -webkit-transform:rotate(5deg);
+  -moz-transform:rotate(5deg);
+}
+.note.rotate4{
+  -o-transform:rotate(-5deg);
+  -webkit-transform:rotate(-5deg);
+  -moz-transform:rotate(-5deg);
+}
+/*.note:nth-child(5n){
+  -o-transform:rotate(5deg);
+  -webkit-transform:rotate(5deg);
+  -moz-transform:rotate(5deg);
+}*/
+.note:hover,.note:focus{
+  box-shadow:10px 10px 7px rgba(0,0,0,.7);
+  -moz-box-shadow:10px 10px 7px rgba(0,0,0,.7);
+  -webkit-box-shadow: 10px 10px 7px rgba(0,0,0,.7);
+  -webkit-transform: scale(1.25);
+  -moz-transform: scale(1.25);
+  -o-transform: scale(1.25);
+  position:relative;
+  z-index:5;
+}
+.note .time{ position:absolute; height:16px; line-height:16px; font-size:12px; position:absolute;
+left:10px; bottom:5px;
+}
+.style1{
+	background-color:rgb(255,88,200);
+}
+.style2{
+	background-color:rgb(173,228,26);
+}
+.style3{
+	background-color:rgb(252,151,52);
+}
+.style4{
+	background-color:rgb(253,253,78); color:#333;
+}
+.style5{
+	background-color:rgb(32,193,252);
+}
+.style6{
+	background-color:rgb(253,131,152);
+}
+.style7{
+	background-color:rgb(40,199,167);
+}
+.style8{
+	background-color:rgb(58,192,230);
+}
+.style9{
+	background-color:rgb(250,95,25);
+}
+.font1{
+	font-family:"jinmei";
+}
+.font2{
+	font-family:"katong";
+}
+.font3{
+	font-family:"qingshu","微软雅黑";
+}
+.messagebox{
+	background-color:#fff; box-shadow:10px 10px 7px rgba(0,0,0,.4);
+	width:500px; border:1px solid #f4f4f4; padding:0px 10px 10px; z-index:20;
+	border-bottom-left-radius:10px; border-bottom-right-radius:10px;
+	position:fixed; left:50%; margin-left:-260px; top:-220px; font-family:"qingshu","微软雅黑";
+	height:190px;
+	-webkit-transition:top .3s ease-in-out; -moz-transition:top .3s ease-in-out;
+	-ms-transition:top .3s ease-in-out; -o-transition:top .3s ease-in-out;
+}
+.messagebox.show{ top:0px;}
+.messagebox label{
+	display:block; height:30px; line-height:30px; font-size:16px; color:#333; font-weight:bold;
+}
+.messagebox input[type=text]{
+	width:150px; padding:5px; border:1px solid #e5e5e5; border-radius:4px; height:18px; line-height:18px;
+	font-size:14px; font-family:"qingshu","微软雅黑"; outline:none;
+}
+.messagebox textarea{
+	width:390px; padding:5px; line-height:24px; font-size:14px; height:48px; resize:none;
+	border:1px solid #e5e5e5; border-radius:5px; font-family:"qingshu","微软雅黑"; outline:none;
+}
+.messagebox em{ font-family:"微软雅黑"; font-size:12px;}
+
+.save-message{
+	display:block; background-color:#28c7a7; color:#fff; font-size:14px; text-align:center; width:120px;
+	border-radius:3px; height:28px; line-height:28px; margin-top:5px; cursor:pointer;
+}
+.messagebox .drag{
+	width:114px; height:152px; position:absolute; left:0px; top:190px;
+	background:url(../images/icons/drag_03.png) no-repeat; cursor:pointer;
+	-webkit-transform-origin:50% 0%; -moz-transform-origin:50% 0%;
+	-ms-transform-origin:50% 0%;-o-transform-origin:50% 0%;
+	-webkit-animation:swinging 2s infinite ease-in-out;
+	-moz-animation:swinging 2s infinite ease-in-out;
+	-ms-animation:swinging 2s infinite ease-in-out;
+	-o-animation:swinging 2s infinite ease-in-out;
+}
+@-webkit-keyframes swinging{
+	0% { -webkit-transform: rotate(0deg); }
+    25% { -webkit-transform: rotate(-10deg); }
+    50% { -webkit-transform: rotate(0deg); }
+	75% { -webkit-transform: rotate(-10deg); }
+    100% { -webkit-transform: rotate(0); }
+}
+@-moz-keyframes swinging{
+	0% { -webkit-transform: rotate(0deg); }
+    25% { -webkit-transform: rotate(-10deg); }
+    50% { -webkit-transform: rotate(0deg); }
+	75% { -webkit-transform: rotate(-10deg); }
+    100% { -webkit-transform: rotate(0); }
+}
+@-ms-keyframes swinging{
+	0% { -webkit-transform: rotate(0deg); }
+    25% { -webkit-transform: rotate(-10deg); }
+    50% { -webkit-transform: rotate(0deg); }
+	75% { -webkit-transform: rotate(-10deg); }
+    100% { -webkit-transform: rotate(0); }
+}
+@-o-keyframes swinging{
+	0% { -webkit-transform: rotate(0deg); }
+    25% { -webkit-transform: rotate(-10deg); }
+    50% { -webkit-transform: rotate(0deg); }
+	75% { -webkit-transform: rotate(-10deg); }
+    100% { -webkit-transform: rotate(0); }
+}
+.arrows{
+	width:35px; height:78px; position:fixed; right:10px; top:50%; margin-top:-40px;
+	overflow:hidden;
+}
+.arrows a{
+	display:block; width:35px; height:34px; margin-bottom:10px; cursor:pointer;
+	background:url(../images/icons/arrows.png) no-repeat;
+}
+.arrows a.prepage{
+	background-position:left top;
+}
+.arrows a.nextpage{
+	background-position:right top;
+}
+.arrows a.prepage:hover{
+	background-position:left -34px;
+}
+.arrows a.nextpage:hover{
+	background-position:right -34px;
+}
+
+
+
+
+
+
+
+

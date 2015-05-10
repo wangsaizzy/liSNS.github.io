@@ -15,6 +15,6 @@ catch (e) {
 }
 $(function(){
 	$(".favorite").on("click",function(){
-		AddFavorite("大晚 | 前端开发",location.href);
+		AddFavorite("kevin | 前端开发",location.href);
 	})
 })

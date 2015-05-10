@@ -127,7 +127,7 @@
 					j.style.cursor = d;
 					if (j.style.cursor == d) return d
 				}
-				return "url(/www.google.com/intl/en_ALL/mapfiles/openhand.cur),n-resize"
+				return "url(http://www.google.com/intl/en_ALL/mapfiles/openhand.cur),n-resize"
 			}();
 			j = null;
 			this.ishwscroll = b.hastransform && b.opt.hwacceleration && b.haswrapper;
