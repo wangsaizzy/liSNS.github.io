@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>获取地理位置</title>
+<link href="http://greenzorro.github.io/colacdn/assets/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="http://greenzorro.github.io/colacdn/assets/css/global.css" rel="stylesheet" type="text/css" />
+<script src="http://greenzorro.github.io/colacdn/assets/js/jquery-latest.js"></script>
+<style>
+</style>
+<script>
+$(function () {
+    getLocation();
+    $("a").click(function () {
+        getLocation();
+    })
+    function getLocation () {
+        // 经度、纬度、平面准确度、海拔高度、海拔准确度、朝向、速度、返回状态
+        var x, y, accuracy, z, accuracyAlt, direction, speed, state;
+        var geo_options = {
+            enableHighAccuracy: true,  //高精度定位
+            maximumAge        : 3000,  //位置信息缓存时长
+            timeout           : 5000  //超时时间
+        };
+        if (navigator.geolocation)
+        {
+            navigator.geolocation.getCurrentPosition(getPosSuccess,getPosFail,geo_options);  //开始获取地理位置，获取成功或失败执行相应操作
+        }
+        else {
+            state = 0;  //获取状态：该浏览器不支持获取位置信息
+        }
+        function getPosSuccess(position)  //获取位置成功
+        {
+            x = position.coords.longitude;  //获取经度
+            y = position.coords.latitude;  //获取维度
+            accuracy = position.coords.accuracy;  //平面准确度
+            z = position.coords.altitude;  //海拔高度
+            accuracyAlt = position.coords.altitudeAccuracy;  //海拔准确度
+            direction = position.coords.heading;  //朝向
+            speed = position.coords.speed;  //速度
+            state = 1;  //获取状态：成功
+            stateAction(x,y,accuracy,z,accuracyAlt,direction,speed,state);  //根据返回状态，执行相应操作
+        }
+        function getPosFail(error)  //获取位置失败
+        {
+            switch(error.code){  //根据返回信息判断错误类型
+                case error.PERMISSION_DENIED:
+                    state = 2;  //获取状态：用户未授权获取位置信息
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    state = 3;  //获取状态：位置信息不可用
+                    break;
+                case error.TIMEOUT:
+                    state = 4;  //获取状态：获取位置信息超时
+                    break;
+                case error.UNKNOWN_ERROR:
+                    state = 5;  //获取状态：定位时发生未知错误
+                    break;
+            }
+            stateAction(x,y,accuracy,z,accuracyAlt,direction,speed,state);  //根据返回状态，执行相应操作
+        }
+    }
+    function stateAction (x,y,accuracy,z,accuracyAlt,direction,speed,state) {  //根据返回状态，执行相应操作
+        switch(state){
+            case 1:
+                $("#test").html("经度: " + x + "<br />纬度: " + y + "<br />平面准确度: " + accuracy + "<br />海拔: " + z + "<br />海拔准确度: " + accuracyAlt + "<br />朝向: " + direction + "<br />速度: " + speed);  //显示位置
+                break;
+            case 0:
+                alert("该浏览器不支持获取位置信息");
+                break;
+            case 2:
+                alert("用户未授权获取位置信息");
+                break;
+            case 3:
+                alert("位置信息不可用");
+                break;
+            case 4:
+                alert("获取位置信息超时");
+                break;
+            case 5:
+                alert("定位时发生未知错误");
+                break;
+        }
+    }
+})
+</script>
+</head>
+
+<body>
+
+<div id="test"></div>
+<a href="javascript:;">刷新地理位置</a>
+<p><br>注：定位的实际效果取决于浏览器。经过测试，QQ浏览器、UC浏览器、百度浏览器能正常获取位置，多数手机的自带浏览器和Android版微信的内嵌浏览器不行</p>
+
+<div style="display:none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?63ba884cf404de06c7d8dcc2fc46343e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+</body>
+</html>

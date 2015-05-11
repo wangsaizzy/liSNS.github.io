@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>列表项滑动删除</title>
+<link href="http://greenzorro.github.io/colacdn/assets/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="http://greenzorro.github.io/colacdn/assets/css/global.css" rel="stylesheet" type="text/css" />
+<script src="http://greenzorro.github.io/colacdn/assets/js/jquery-latest.js"></script>
+<style>
+body { background: #eee; }
+ul { overflow: hidden; margin: 1em; border: 1px solid #dfdfdf; border-radius: 0.5em; }
+li { height: 50px; border-top: 1px solid #dfdfdf; position: relative; }
+li:first-of-type { border: none; }
+li .item { width: 100%; height: 100%; background: #fff; position: absolute; left: 0; top: 0; z-index: 5; }
+li .item h3 { float: left; line-height: 50px; padding: 0 1em; }
+li .item p { float: right; line-height: 50px; padding: 0 1em; }
+li a { display: block; width: 0; height: 100%; line-height: 50px; overflow: hidden; color: #fff; text-align: center; font-size: 0.8em; position: absolute; top: 0; z-index: 1; }
+li a.duplicate { background: #6fa0b9; left: 0; }
+li a.delete { background: #f35145; right: 0; }
+</style>
+<script>
+$(function () {
+    // 初始x坐标、当前x坐标、可滑动的最大距离
+    var beginPos, currentPos, maxWidth = 80;
+    bindSlideEvent();
+    function bindSlideEvent () {
+        for (var i = 0; i < document.getElementsByClassName("item").length; i++) {
+            document.getElementsByClassName("item")[i].addEventListener("touchstart", slideHorizontal, false);
+            document.getElementsByClassName("item")[i].addEventListener("touchmove", slideHorizontal, false);
+            document.getElementsByClassName("item")[i].addEventListener("touchend", slideHorizontal, false);
+        };
+    }
+    function slideHorizontal(event) {
+        var thisObj = $(event.target);
+        while(!thisObj.hasClass("item"))  //找到正在滑动的列表项
+        {
+            thisObj = thisObj.parent();
+        }
+        switch (event.type) {
+            case "touchstart":  //触摸开始
+                beginPos = event.touches[0].clientX;  //获取初始触点x坐标
+                currentPos = beginPos;  //当前x坐标就是初始坐标
+                break;
+            case "touchmove":  //手指滑动
+                currentPos = event.changedTouches[0].clientX;  //获取当前触点x坐标
+                var direction = (currentPos - beginPos)/Math.abs(currentPos - beginPos);  //获取滑动方向（正负号）
+                if (Math.abs(currentPos - beginPos) > maxWidth) {  //超出最大可滑动距离
+                    thisObj.css({"left":direction*maxWidth + "px"});  //滑动到最大距离
+                    thisObj.parent().find("a").width(maxWidth);  //露出两侧内容
+                }
+                else {  //在最大可滑动距离内
+                    thisObj.css({"left":currentPos - beginPos + "px"});  //任意滑动列表项
+                    thisObj.parent().find("a").width(Math.abs(currentPos - beginPos));  //露出两侧内容
+                }
+                event.preventDefault();  //阻止默认滚动事件
+                break;
+            case "touchend":  //触摸结束 
+                thisObj.parent().find("a").animate({  //隐藏两侧内容
+                    width: 0
+                },100);
+                thisObj.animate({  //列表项归位
+                    left: 0
+                },100,function () {
+                    if (Math.abs(currentPos - beginPos) >= maxWidth) {  //松手时滑动距离超出最大距离
+                        if (beginPos > currentPos) {  //左滑删除
+                            thisObj.parent().animate({
+                                height: 0,
+                                opacity: 0
+                            },300,function () {
+                                $(this).remove();
+                            })
+                        }
+                        else {  //右滑复制
+                            var thisHtml = thisObj.parent().html();
+                            thisObj.parent().after("<li style='height:0'>" + thisHtml + "</li>");
+                            thisObj.parent().next().animate({
+                                height: "50px",
+                                opacity: 1
+                            },300)
+                            bindSlideEvent();
+                        }
+                    };
+                });
+                break;
+        }
+    }
+})
+</script>
+</head>
+
+<body>
+
+<ul>
+    <li>
+        <div class="item">
+            <h3>08:10</h3>
+            <p>weekdays</p>
+        </div>
+        <a class="duplicate" href="javascript:;">duplicate</a>
+        <a class="delete" href="javascript:;">delete</a>
+    </li>
+    <li>
+        <div class="item">
+            <h3>09:30</h3>
+            <p>weekends</p>
+        </div>
+        <a class="duplicate" href="javascript:;">duplicate</a>
+        <a class="delete" href="javascript:;">delete</a>
+    </li>
+</ul>
+
+<div style="display:none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?63ba884cf404de06c7d8dcc2fc46343e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+</body>
+</html>

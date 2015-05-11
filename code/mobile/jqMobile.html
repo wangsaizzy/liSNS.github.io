@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>jQuery Mobile</title>
+<link href="http://greenzorro.github.io/colacdn/assets/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="http://greenzorro.github.io/colacdn/assets/css/global.css" rel="stylesheet" type="text/css" />
+<script src="http://greenzorro.github.io/colacdn/assets/js/jquery-latest.js"></script>
+<link rel="stylesheet" href="http://greenzorro.github.io/colacdn/assets/frameworks/jqmobile/jquery.mobile-latest.css">
+<script src="http://greenzorro.github.io/colacdn/assets/frameworks/jqmobile/jquery.mobile-latest.js"></script>
+<style type="text/css">
+</style>
+<script>
+$(document).on("pagebeforecreate",function (event) {
+	// 页面即将初始化
+})
+$(document).on("pagecreate",function (event) {
+	// 页面已创建
+})
+$(document).on("pageinit",function (event) {
+	// 页面已初始化
+})
+$(document).on("pageload",function(event,data){
+	// 页面加载成功
+});
+$(document).on("pageloadfailed",function(event,data){
+	// 页面加载失败
+});
+$(document).on("pagebeforeshow","#about",function(){
+	// 即将进入about
+});
+$(document).on("pageshow","#about",function(){
+	// 已经进入about
+});
+$(document).on("pagebeforehide","#home",function(){
+	// 即将离开home
+});
+$(document).on("pagehide","#home",function(){
+	// 已经离开home
+});
+$(document).on("pageinit","#home",function () {
+	$("#test").on("tap",function () {
+		$("#test").html("tap");
+	})
+	$("#test").on("taphold",function () {
+		$("#test").html("taphold!!");
+	})
+	$(document).on("swipe",function () {
+		$("#test").html("swipe");
+	})
+	$(document).on("swipeleft",function () {
+		$("#test").css("text-indent","-2em");
+	})
+	$(document).on("swiperight",function () {
+		$("#test").css("text-indent","2em");
+	})
+	$(document).on("scrollstart",function () {
+		$("#test").html("scrolling");
+		$("#test").css("color","red");
+	})
+	$(document).on("scrollstop",function () {
+		$("#test").css("color","inherit");
+	})
+	$(window).on("orientationchange",function(event){
+		alert("方向是：" + event.orientation);
+	});
+})
+$(document).on("pageinit","#about",function () {
+})
+</script>
+</head>
+
+<body>
+
+<div data-role="page" id="home">
+	<div data-role="header" data-position="fixed">
+		<a href="#" data-role="button" data-icon="grid" data-iconpos="notext">menu</a>
+		<h1>home</h1>
+		<a href="#" data-role="button" data-icon="search" data-iconpos="notext">search</a>
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#">category1</a></li>
+				<li><a href="#">category2</a></li>
+				<li><a href="#">category3</a></li>
+			</ul>
+		</div>
+	</div>
+	<div data-role="content">
+		<p data-role="controlgroup" data-type="vertical">
+			<a href="#about" data-role="button" data-transition="slide">go to about</a>
+			<a href="#dialog1" data-role="button" data-rel="dialog">open dialog</a>
+		</p>
+		<a id="test" href="#" data-role="button">test button</a>
+		<div data-role="collapsible" data-inset="false" data-collapsed="false">
+			<h1>点击我 - 我可以折叠！</h1>
+			<p>现在我默认是展开的。</p>
+			<p>现在我默认是展开的。</p>
+			<p>现在我默认是展开的。</p>
+		</div>
+		<ul data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="搜索姓名">
+			<li><a href="#">Adele</a></li>
+			<li><a href="#">Agnes</a></li>
+			<li><a href="#">Albert</a></li>
+			<li><a href="#">Billy</a></li>
+			<li><a href="#">Bob</a></li>
+			<li><a href="#">Calvin</a></li>
+			<li><a href="#">Cameron</a></li>
+			<li><a href="#">Chloe</a></li>
+			<li><a href="#">Christina</a></li>
+			<li><a href="#">Diana</a></li>
+			<li><a href="#">Gabriel</a></li>
+			<li><a href="#">Glen</a></li>
+			<li><a href="#">Ralph</a></li>
+			<li><a href="#">Valarie</a></li>
+		</ul>
+		<form method="post" action="demoform.asp">
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>请选择您的性别：</legend>
+				<label for="male">男性</label>
+				<input type="radio" name="gender" id="male" value="male" checked>
+				<label for="female">女性</label>
+				<input type="radio" name="gender" id="female" value="female">	
+			</fieldset>
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>请选择您喜爱的颜色：</legend>
+				<label for="red">红色</label>
+				<input type="checkbox" name="favcolor" id="red" value="red">
+				<label for="green">绿色</label>
+				<input type="checkbox" name="favcolor" id="green" value="green">
+				<label for="blue">蓝色</label>
+				<input type="checkbox" name="favcolor" id="blue" value="blue">	
+				<label for="yellow">黄色</label>
+				<input type="checkbox" name="favcolor" id="yellow" value="yellow">	
+			</fieldset>
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>安排会议：</legend>
+				<label for="day">选择日期：</label>
+				<select name="day" id="day">
+					<option value="mon">Monday</option>
+					<option value="tue">Tuesday</option>
+					<option value="wed">Wednesday</option>
+					<option value="thu">Thursday</option>
+					<option value="fri">Friday</option>
+					<option value="sat">Saturday</option>
+					<option value="sun">Sunday</option>
+				</select>
+				<label for="time">选择时间：</label>
+				<select name="time" id="time">
+					<option value="08">08:00</option>
+					<option value="09">09:00</option>
+					<option value="10">10:00</option>
+					<option value="11">11:00</option>
+					<option value="12">12:00</option>
+					<option value="13">13:00</option>
+					<option value="14">14:00</option>
+					<option value="15">15:00</option>
+					<option value="16">16:00</option>
+				</select>
+			</fieldset>
+			<div data-role="fieldcontain">
+				<input type="range" name="points" id="points" value="50" min="0" max="100" data-highlight="true">
+			</div>
+			<div data-role="fieldcontain">
+				<select name="switch" id="switch" data-role="slider">
+					<option value="on">On</option>
+					<option value="off" selected>Off</option>
+				</select>
+			</div>
+		</form>
+	</div>
+	<div data-role="footer">footer</div>
+</div>
+<div data-role="page" id="about">
+	<div data-role="header">
+		<a href="#" data-role="button" data-icon="grid" data-iconpos="notext">menu</a>
+		<h1>about</h1>
+		<a href="#" data-role="button" data-icon="search" data-iconpos="notext">search</a>
+	</div>
+	<div data-role="content">
+		<p data-role="controlgroup" data-type="horizontal">
+			<a href="#" data-role="button" data-transition="slide" data-rel="back">go back</a>
+			<a href="#home" data-role="button" data-transition="slide" data-direction="reverse">go to home</a>
+		</p>
+	</div>
+</div>
+<div data-role="page" data-overlay-theme="b" id="dialog1">
+	<div data-role="header">
+		<h1>dialog</h1>
+	</div>
+	<div data-role="content">dialog content</div>
+</div>
+
+<div style="display:none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?63ba884cf404de06c7d8dcc2fc46343e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+</body>
+</html>
