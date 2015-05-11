@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>CSS视觉差滚动</title>
+<link href="http://greenzorro.github.io/colacdn/assets/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="http://greenzorro.github.io/colacdn/assets/css/global.css" rel="stylesheet" type="text/css" />
+<script src="http://greenzorro.github.io/colacdn/assets/js/jquery-latest.js"></script>
+<style type="text/css">
+
+/* 原作参考：http://keithclark.co.uk/articles/pure-css-parallax-websites */
+
+/* custom style */
+.section2 {
+	z-index: 1;
+}
+.section1,
+.section4 {
+	z-index: 2;
+}
+.section3,
+.section5 {
+	z-index: 3;
+}
+.section1 .parallax_content_back {
+	background: url(http://greenzorro.github.io/colacdn/assets/images/texture1.png) repeat;
+}
+.section2 .parallax_content_back2 {
+	background: url(http://greenzorro.github.io/colacdn/assets/images/texture3.jpg) repeat;
+}
+.section4 .parallax_content_back {
+	background: url(http://greenzorro.github.io/colacdn/assets/images/texture2.png) repeat;
+}
+.section2 .parallax_content_base {
+	color: #fff;
+}
+.section3 .parallax_content_base {
+	background: #333;
+	color: #fff;
+}
+.section5 .parallax_content_base {
+	background: #fff;
+	color: #333;
+}
+.section2 .parallax_content_fore {
+	color: #fff;
+}
+h1 {
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+
+/* debug */
+a.debug {
+	padding: 0.3em 0.5em;
+	border: 1px solid #58b798;
+	border-radius: 0.3em;
+	color: #58b798;
+	font-size: 0.9em;
+	position: fixed;
+	right: 2em;
+	top: 1em;
+	z-index: 99;
+	transition: all 0.3s ease-in-out;
+	-webkit-transition: all 0.3s ease-in-out;
+}
+.debug_on a.debug {
+	background: #58b798;
+	color: #fff;
+}
+.parallax .parallax_section {
+	transition: transform 0.3s ease-in-out;
+	-webkit-transition: -webkit-transform 0.3s ease-in-out;
+}
+.debug_on .parallax .parallax_section {
+	transform: translate3d(300px, 0, -800px) rotateY(15deg);
+	-webkit-transform: translate3d(300px, 0, -800px) rotateY(15deg);
+}
+.debug_on .parallax .parallax_section .parallax_content {
+	box-shadow: 0 0 0 2px #e44e3f;
+}
+
+
+/* parallax style */
+.parallax {
+	min-height: 650px;
+	height: 100vh;
+	overflow-x: hidden;
+	overflow-y: auto;
+	perspective-origin: 50% 50%;
+	-webkit-perspective-origin: 50% 50%;
+	perspective: 500px;
+	-webkit-perspective: 500px;
+}
+.parallax .parallax_section {
+	height: 100vh;
+	position: relative;
+	transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
+}
+.parallax .parallax_content {
+	text-align: center;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	/* set left and right, top and bottom 0 to make it fit the parent's width and height */
+}
+.parallax_content_fore {  /* foreground */
+	transform: translate3d(0,0,250px) scale(0.5);
+	-webkit-transform: translate3d(0,0,250px) scale(0.5);
+}
+.parallax_content_base {  /* base */
+	transform: translate3d(0,0,0) scale(1);
+	-webkit-transform: translate3d(0,0,0) scale(1);
+}
+.parallax_content_back {  /* deep background */
+	transform: translate3d(0,0,-500px) scale(2);
+	-webkit-transform: translate3d(0,0,-500px) scale(2);
+}
+.parallax_content_back2 {  /* deeper background */
+	transform: translate3d(0,0,-1000px) scale(3);
+	-webkit-transform: translate3d(0,0,-1000px) scale(3);
+}
+
+
+/* fixed_center style */
+.fixed_center_wrap {
+    display: -webkit-flex;
+    display: flex;
+}
+.fixed_center {
+    margin: auto;
+}
+
+</style>
+<script type="text/javascript">
+$(function () {
+	$(".debug").click(function () {
+		if ($("html").hasClass("debug_on")) {
+			$("html").removeClass("debug_on");
+		}
+		else {
+			$("html").addClass("debug_on");
+		}
+	})
+})
+</script>
+</head>
+
+<body>
+
+<div class="parallax">
+	<section class="section1 parallax_section">
+		<div class="parallax_content_back parallax_content"></div>
+		<div class="parallax_content_base parallax_content fixed_center_wrap">
+			<div class="fixed_center">
+				<h1>section 1</h1>
+				<p>this is section 1.</p>
+			</div>
+		</div>
+	</section>
+	<section class="section_empty parallax_section"></section>
+	<section class="section2 parallax_section">
+		<div class="parallax_content_back2 parallax_content fixed_center_wrap"></div>
+		<div class="parallax_content_base parallax_content fixed_center_wrap">
+			<div class="fixed_center">
+				<h1>section 2</h1>
+				<p>this is section 2.</p>
+			</div>
+		</div>
+		<div class="parallax_content_fore parallax_content fixed_center_wrap">
+			<div class="fixed_center">
+				<h1>Floating content</h1>
+			</div>
+		</div>
+	</section>
+	<section class="section3 parallax_section">
+		<div class="parallax_content_base parallax_content fixed_center_wrap">
+			<div class="fixed_center">
+				<h1>section 3</h1>
+				<p>this is section 3.</p>
+			</div>
+		</div>
+	</section>
+	<section class="section4 parallax_section">
+		<div class="parallax_content_back parallax_content fixed_center_wrap"></div>
+		<div class="parallax_content_base parallax_content fixed_center_wrap">
+			<div class="fixed_center">
+				<h1>section 4</h1>
+				<p>this is section 4.</p>
+			</div>
+		</div>
+		<div class="parallax_content_fore parallax_content fixed_center_wrap">
+			<div class="fixed_center">
+				<h1>Floating content</h1>
+			</div>
+		</div>
+	</section>
+	<section class="section5 parallax_section">
+		<div class="parallax_content_base parallax_content fixed_center_wrap">
+			<div class="fixed_center">
+				<h1>section 5</h1>
+				<p>this is section 5.</p>
+			</div>
+		</div>
+	</section>
+</div>
+<a class="debug" href="javascript:;">debug</a>
+
+<div style="display:none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?63ba884cf404de06c7d8dcc2fc46343e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+</body>
+</html>
