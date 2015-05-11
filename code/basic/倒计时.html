@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>倒计时</title>
+<link href="http://greenzorro.github.io/colacdn/assets/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="http://greenzorro.github.io/colacdn/assets/css/global.css" rel="stylesheet" type="text/css" />
+<script src="http://greenzorro.github.io/colacdn/assets/js/jquery-latest.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var countTime = 5;	// seconds
+	var currentTime = countTime;
+	$(".countboard span").html(countTime);
+	$("input#start").click(function(){
+		if($(this).attr("value") == "start"){
+			$(this).attr("value","pause");
+			countdown();
+		}
+		else {
+			$(this).attr("value","start");
+			clearInterval(counter);
+		}
+	});
+	$("input#reset").click(function(){
+		$("input#start").attr("value","start");
+		currentTime = countTime;
+		$(".countboard span").html(countTime);
+		clearInterval(counter);
+	});
+	function countdown(){
+		counter = setInterval(function() {
+			$(".countboard span").html(currentTime--);
+			if (currentTime < 0) {
+				$("input#start").attr("value","start");
+				currentTime = countTime;
+				clearInterval(counter);
+			}
+		}, 1000);
+	}
+});
+</script>
+<style>
+input[type="button"] { float:left; width:70px; height:25px; line-height:25px; text-align:center; }
+</style>
+</head>
+
+<body>
+<div class="countboard">
+    Counting Down: <span></span>
+</div>
+<input id="start" type="button" value="start" />
+<input id="reset" type="button" value="reset" />
+
+<div style="display:none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?63ba884cf404de06c7d8dcc2fc46343e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+</body>
+</html>

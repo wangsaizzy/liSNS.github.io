@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>鼠标滚轮翻页</title>
+<link href="http://greenzorro.github.io/colacdn/assets/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="http://greenzorro.github.io/colacdn/assets/css/global.css" rel="stylesheet" type="text/css" />
+<script src="http://greenzorro.github.io/colacdn/assets/js/jquery-latest.js"></script>
+<script src="http://greenzorro.github.io/colacdn/assets/frameworks/jquery.mousewheel/jquery.mousewheel.js"></script>
+<style>
+body { height: 100vh; overflow: hidden; }
+.scene { width: 100%; min-height: 100vh; }
+.scene1 { background: #75aecc; }
+.scene2 { background: #8182a6; }
+.scene3 { background: #a0677a; }
+</style>
+</head>
+
+<body>
+
+<div class="scene1 scene"></div>
+<div class="scene2 scene"></div>
+<div class="scene3 scene"></div>
+
+<script type="text/javascript">
+$(function () {
+	scrollPage(); //滑动翻页
+})
+
+// 滑动翻页
+function scrollPage () {
+
+	var currentPage = 1;  //从1开始
+	var maxPage = $(".scene").length;
+
+	document.addEventListener("mousewheel", throttle(handlePaging, 100), false);
+	document.addEventListener("DOMMouseScroll", throttle(handlePaging, 100), false);
+	function handlePaging (e) {
+		e.preventDefault();
+		e = e || window.event;
+		var dir = Number(e.wheelDelta || -e.detail) > 0 ? 1 : -1;
+		if (currentPage - dir >= 1 && currentPage - dir <= maxPage) {
+			currentPage -= dir;
+		}
+		jumpTo(currentPage);
+		console.log(currentPage);
+	}
+
+	// 跳转至某页
+	function jumpTo (n) {
+		var offTop = $(".scene" + n).offset().top;
+		$("html,body").stop();
+		$("html,body").animate({
+			scrollTop: offTop
+		},500);
+	}
+
+}
+
+// 阻止滚轮事件频繁触发
+var throttle = function(fn, timeout){
+    var timer;
+    return function(){
+        var self = this,
+            args = arguments;
+        clearTimeout( timer );
+        timer = setTimeout(function(){
+            fn.apply( self, args );
+        }, timeout );
+    };
+}
+</script>
+
+<div style="display:none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?63ba884cf404de06c7d8dcc2fc46343e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+</body>
+</html>

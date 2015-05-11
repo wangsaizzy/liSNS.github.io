@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>操作cookie</title>
+<link href="http://greenzorro.github.io/colacdn/assets/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="http://greenzorro.github.io/colacdn/assets/css/global.css" rel="stylesheet" type="text/css" />
+<script src="http://greenzorro.github.io/colacdn/assets/js/jquery-latest.js"></script>
+<script type="text/javascript">
+window.onload = function () {
+
+	console.log(document.cookie);
+	checkCookie();
+
+}
+
+function checkCookie() {
+	var test = document.getElementById('test');
+    var user = getCookie("username");
+    if (user != "") {
+    	test.innerHTML = user;
+    }
+    else {
+    	test.innerHTML = "";
+		user = prompt("Please enter your name:","");
+		if (user != "" && user != null) {
+			setCookie("username", user, 1/24/60);
+		}
+    }
+}
+
+function setCookie(cname,cvalue,exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = cname+"="+cvalue+"; "+expires+"; path=/";
+}
+
+function getCookie(cname) {
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i], nameStr;
+        while (c.charAt(0)==' ') c = c.substring(1);
+        nameStr = c.split("=")[0];
+        if (nameStr == cname) {
+        	return c.substring(nameStr.length + 1, c.length);
+        }
+    }
+    return "";
+}
+</script>
+</head>
+
+<body>
+	<div id="test"></div>
+
+<div style="display:none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?63ba884cf404de06c7d8dcc2fc46343e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+</body>
+</html>

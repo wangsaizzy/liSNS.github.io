@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>JS判断是否数组</title>
+<link href="http://greenzorro.github.io/colacdn/assets/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="http://greenzorro.github.io/colacdn/assets/css/global.css" rel="stylesheet" type="text/css" />
+<script src="http://greenzorro.github.io/colacdn/assets/js/jquery-latest.js"></script>
+<style>
+</style>
+<script type="text/javascript">
+window.onload = function () {
+	var test = document.getElementById('test');
+	var testObj1 = [];
+	var testObj2 = {"attr1":"", "attr2":""};
+	test.innerHTML = "isArray(testObj1): " + isArray(testObj1) + "<br>isArray(testObj2): " + isArray(testObj2);
+	function isArray(myArray) {
+		return myArray.constructor.toString().indexOf("Array") > -1;
+	}	
+}
+</script>
+</head>
+
+<body>
+	<div id="test"></div>
+
+<div style="display:none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?63ba884cf404de06c7d8dcc2fc46343e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+</body>
+</html>

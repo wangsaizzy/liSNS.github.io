@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>剪贴板操作</title>
+<link href="http://greenzorro.github.io/colacdn/assets/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="http://greenzorro.github.io/colacdn/assets/css/global.css" rel="stylesheet" type="text/css" />
+<script src="http://greenzorro.github.io/colacdn/assets/js/jquery-latest.js"></script>
+<script src="ZeroClipboard.min.js"></script>
+<script type="text/javascript">
+$(function () {
+	var clip = new ZeroClipboard($(".copy"));
+})
+</script>
+</head>
+
+<body>
+
+<p>注：由于 Flash 本地沙箱的安全限制，以下代码如果是在本地HTML文件中被浏览器直接打开，将无法正常工作。</p>
+
+<input id="source" type="text" value="#文字内容#"><br>
+<a class="copy" data-clipboard-target="source" href="javascript:;">复制输入框内容</a><br>
+<a class="copy" data-clipboard-text="#链接本身属性#" href="javascript:;">复制链接本身属性</a><br>
+<textarea placeholder="粘贴在此"></textarea>
+
+<div style="display:none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?63ba884cf404de06c7d8dcc2fc46343e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+</body>
+</html>

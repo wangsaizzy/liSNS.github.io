@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>分离文字</title>
+<link href="http://greenzorro.github.io/colacdn/assets/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="http://greenzorro.github.io/colacdn/assets/css/global.css" rel="stylesheet" type="text/css" />
+<script src="http://greenzorro.github.io/colacdn/assets/js/jquery-latest.js"></script>
+<style>
+#wrapper {
+	display: -webkit-flex;
+	display: flex;
+	height: 100vh;
+	overflow: hidden;
+	-webkit-perspective: 500px;
+	perspective: 500px;
+}
+#test {
+	width: 40%;
+	height: 50%;
+	padding: 1em;
+	margin: auto;
+	background: #f5f5f5;
+	font-size: 1.2em;
+	position: relative;
+}
+p {
+	position: fixed;
+	right: 2em;
+	top: 5em;
+}
+
+#valid {
+	padding: 0.8em 0;
+	background: #f04961;
+	color: #fff;
+	text-align: center;
+	font-size: 1.2em;
+	opacity: 0.9;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	z-index: 9999;
+}
+</style>
+</head>
+
+<body>
+
+<div id="wrapper">
+	<div id="test">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+</div>
+<p>
+	<button id="chars">split chars</button>
+	<button id="words">split words</button>
+	<button id="lines">split lines</button>
+</p>
+
+<div id="valid">SplitText need a valid membership to use.</div>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+<script src="http://greenzorro.github.io/colacdn/assets/frameworks/GSAP/membership/SplitText.min.js"></script>
+<script>
+(function () {
+	window.onload = function () {
+		var testTimeline = new TimelineMax({onComplete:kill});
+		var test = new SplitText("#test", {type:"words", position:"absolute"});
+
+		$("#chars").click(function () {
+			kill();
+			test.split({type:"words,chars"});
+			$(test.chars).each(function () {
+				testTimeline.from($(this), 2, {opacity:0, scale:Math.random()*0.5, ease:Power2.easeOut}, Math.random());
+			})
+		})
+		$("#words").click(function () {
+			kill();
+			test.split({type:"lines,words"});
+			testTimeline.staggerFrom(test.words, 0.5, {opacity:0, rotationX:60, transformOrigin:"50% 50% 30px", ease:Back.easeOut}, 0.005);
+		})
+		$("#lines").click(function () {
+			kill();
+			test.split({type:"lines,words"});
+			testTimeline.staggerFrom(test.lines, 1, {opacity:0, rotationY:-10, transformOrigin:"0 50%", ease:Back.easeOut}, 0.1);
+		})
+
+		//kill any animations and set text back to its pre-split state
+		function kill(){
+			testTimeline.clear().time(0);
+			test.revert();
+		}
+
+		// using splitText without timeline
+		var valid = new SplitText("#valid", {type:"words", position:"absolute"});
+		TweenMax.staggerFrom(valid.words, 0.5, {y:10, opacity:0, ease:Back.easeOut}, 0.1, function () {
+			valid.revert();
+		})
+	}
+})()
+</script>
+
+<div style="display:none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?63ba884cf404de06c7d8dcc2fc46343e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+</body>
+</html>

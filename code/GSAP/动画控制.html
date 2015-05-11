@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>动画控制</title>
+<link href="http://greenzorro.github.io/colacdn/assets/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="http://greenzorro.github.io/colacdn/assets/css/global.css" rel="stylesheet" type="text/css" />
+<script src="http://greenzorro.github.io/colacdn/assets/js/jquery-latest.js"></script>
+<style>
+.wrapper {
+	display: -webkit-flex;
+	display: flex;
+	height: 100vh;
+	overflow: auto;
+	-webkit-perspective-origin: 50% 50%;
+	perspective-origin: 50% 50%;
+	-webkit-perspective: 500px;
+	perspective: 500px;
+}
+.test {
+	width: 300px;
+	height: 300px;
+	margin: auto;
+	background: #227755;
+}
+p {
+	position: fixed;
+	right: 20px;
+	top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+	<div id="test" class="test"></div>
+</div>
+<p>
+	<button id="resume">play</button>
+	<button id="pause">pause</button>
+	<button id="reverse">reverse</button>
+	<button id="restart">restart</button>
+	<button id="seek">go to 0.5s</button>
+	<button id="timeScaleUp">speed x 5</button>
+	<button id="timeScaleNormal">speed x 1</button>
+	<button id="timeScaleDown">speed x 0.2</button>
+	<button id="kill">kill</button>
+</p>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+<script>
+(function () {
+	window.onload = function () {
+		var test = TweenMax.to("#test", 2, {rotationX:180, z:-300, ease:Power4.easeInOut, paused:true, onComplete:done});
+		$("#resume").click(function () {test.resume();});
+		$("#pause").click(function () {test.pause();});
+		$("#reverse").click(function () {test.reverse();});
+		$("#restart").click(function () {test.restart();});
+		$("#seek").click(function () {test.seek(0.5);});  //jump to a time and keep the current state: play or pause, forward or backward.
+		$("#timeScaleUp").click(function () {test.timeScale(5);});
+		$("#timeScaleNormal").click(function () {test.timeScale(1);});
+		$("#timeScaleDown").click(function () {test.timeScale(0.2);});
+		$("#kill").click(function () {test.kill();});
+	}
+	function done () {
+		alert("done");
+	}
+})()
+</script>
+
+<div style="display:none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?63ba884cf404de06c7d8dcc2fc46343e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+</body>
+</html>

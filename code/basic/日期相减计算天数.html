@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>日期相减计算天数</title>
+<link href="http://greenzorro.github.io/colacdn/assets/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="http://greenzorro.github.io/colacdn/assets/css/global.css" rel="stylesheet" type="text/css" />
+<script src="http://greenzorro.github.io/colacdn/assets/js/jquery-latest.js"></script>
+<script type="text/javascript">
+
+$(function () {
+	var today = new Date();
+    var todayFormat = today.getFullYear() + "-" + Number(today.getMonth() + 1) + "-" + today.getDate() + " " + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var diffTime = toTimeUnit(dateDiff("2014-12-18 10:56:47", todayFormat));
+    $('body').html("2014-12-18 10:56:47 距今：" + diffTime[1] + "天 " + diffTime[2] + "小时 " + diffTime[3] + "分 " + diffTime[4] + "秒");
+});
+
+// 日期时间相减得到毫秒数，格式为：YYYY-MM-DD HH:MM:SS
+function dateDiff(sDate1, sDate2) {
+    var cal, oDate1, oDate2;
+    cal = sDate1.split(" ");
+    cal = cal[0].split("-") + "," + cal[1].split(":");
+    cal = cal.split(",");
+    oDate1 = new Date(cal[0], cal[1], cal[2], cal[3], cal[4], cal[5]);  //转换为2014-12-18 10:57:47格式
+    cal = sDate2.split(" ");
+    cal = cal[0].split("-") + "," + cal[1].split(":");
+    cal = cal.split(",");
+    oDate2 = new Date(cal[0], cal[1], cal[2], cal[3], cal[4], cal[5]);
+    cal = parseInt(oDate1 - oDate2);  //时间相减得到毫秒数
+    return cal;
+}
+
+// 将毫秒数转化为天、时、分、秒
+function toTimeUnit (millisecond) {
+    var diff = new Array();
+    diff[0] = Math.abs(parseInt(millisecond/1000));  //总秒数
+    diff[1] = Math.floor(diff[0]/60/60/24);  //天
+    diff[2] = diff[0]%(60*60*24);
+    diff[2] = Math.floor(diff[2]/60/60);  //时
+    diff[3] = diff[0]%(60*60);
+    diff[3] = Math.floor(diff[3]/60);  //分
+    diff[4] = Math.floor(diff[0]%60);  //秒
+    return diff;
+}
+</script>
+</head>
+
+<body>
+
+<div style="display:none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?63ba884cf404de06c7d8dcc2fc46343e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+</body>
+</html>

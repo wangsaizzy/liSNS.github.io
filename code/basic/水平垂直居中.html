@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>水平垂直居中</title>
+<link href="http://greenzorro.github.io/colacdn/assets/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="http://greenzorro.github.io/colacdn/assets/css/global.css" rel="stylesheet" type="text/css" />
+<script src="http://greenzorro.github.io/colacdn/assets/js/jquery-latest.js"></script>
+<style>
+div {
+    width: 30em;
+    height: 15em;
+    margin: 10em;
+    border: 1px solid #eee;
+    overflow: auto;
+    resize: both;
+}
+h1 {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+article {
+    text-align: center;
+}
+
+/* fixed_center style */
+.fixed_center_wrap {
+    position: relative;
+}
+.fixed_center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+/* fixed_center2 style */
+.fixed_center2_wrap {
+    display: -webkit-flex;
+    display: flex;
+}
+.fixed_center2 {
+    margin: auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="fixed_center_wrap">
+    <article class="fixed_center">
+        <h1>CSS transform</h1>
+        <p>using transform and postion:absolute</p>
+    </article>
+</div>
+<div class="fixed_center2_wrap">
+    <article class="fixed_center2">
+        <h1>display:flex</h1>
+        <p>using display:flex</p>
+    </article>
+</div>
+
+<div style="display:none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?63ba884cf404de06c7d8dcc2fc46343e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+</body>
+</html>

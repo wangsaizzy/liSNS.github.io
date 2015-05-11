@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>canvas基础</title>
+<link href="http://greenzorro.github.io/colacdn/assets/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="http://greenzorro.github.io/colacdn/assets/css/global.css" rel="stylesheet" type="text/css" />
+<script src="http://greenzorro.github.io/colacdn/assets/js/jquery-latest.js"></script>
+<style>
+#wrapper {
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+</style>
+</head>
+
+<body>
+
+<div id="wrapper">
+	<canvas id="test"></canvas>
+</div>
+
+<script>
+(function () {
+	window.onresize = setCanvas;
+	window.onload = setCanvas;
+	function setCanvas () {
+		var canvas = document.getElementById('test');
+		var paint = canvas.getContext("2d");
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+		paint.clearRect(0,0,canvas.width,canvas.height);  //first, clear canvas
+		console.log(paint);
+
+		// draw rectangular
+		paint.fillStyle = "#275";
+		paint.fillRect(50, 50, 150, 100);
+
+		// draw line
+		paint.moveTo(50, 50);
+		paint.lineTo(125, 150);
+		paint.lineTo(200, 50);
+		paint.lineWidth = 2;
+		paint.strokeStyle = "#fff";
+		paint.stroke();
+
+		// draw circle
+		paint.beginPath();
+		paint.arc(300, 100, 50, 0, 2*Math.PI);  //centre x, centre y, radius, begin radian, end radian
+		paint.lineWidth = 4;
+		paint.strokeStyle = "#c22";
+		paint.stroke();
+
+		// draw linear gradient
+		var gra1 = paint.createLinearGradient(50, 200, 150, 300);
+		gra1.addColorStop(0, "#275");
+		gra1.addColorStop(0.6, "#772");
+		gra1.addColorStop(1, "#c22");
+		paint.beginPath();
+		paint.arc(100, 250, 50, 0, 2*Math.PI);
+		paint.fillStyle = gra1;
+		paint.fill();
+
+		// draw radial gradient
+		var gra2 = paint.createRadialGradient(250, 250, 0, 299, 250, 50);
+		gra2.addColorStop(0, "#275");
+		gra2.addColorStop(1, "#c22");
+		paint.fillStyle = gra2;
+		paint.fillRect(200, 200, 150, 100);
+
+		// draw text
+		paint.font = "1.5em Helvetica";
+		paint.fillStyle = "#fff";
+		paint.strokeStyle = "#275";
+		paint.lineWidth = 1;
+		paint.fillText("Draw text on canvas.", 50, 350);
+		paint.strokeText("Draw text on canvas.", 50, 350);
+		paint.fillStyle = "#c22";
+		paint.textAlign = "center";
+		paint.fillText("The center.", canvas.width/2, canvas.height/2);
+
+		// draw image
+		var img = new Image();
+		img.src = "http://greenzorro.github.io/colacdn/assets/images/mask.png";
+		img.addEventListener("load", function () {
+			paint.drawImage(img, 50, 400);
+		}, false)
+	}
+})()
+</script>
+
+<div style="display:none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?63ba884cf404de06c7d8dcc2fc46343e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+</body>
+</html>

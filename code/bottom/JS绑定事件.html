@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>JS绑定事件</title>
+<link href="http://greenzorro.github.io/colacdn/assets/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="http://greenzorro.github.io/colacdn/assets/css/global.css" rel="stylesheet" type="text/css" />
+<script src="http://greenzorro.github.io/colacdn/assets/js/jquery-latest.js"></script>
+<style>
+</style>
+<script type="text/javascript">
+window.onload = function () {
+	addEvent(getElementsByClassName('test')[0],'click',function () {
+		alert('1');
+	});
+	function addEvent(obj,event,fn)
+	{
+		(obj.attachEvent)?//ie
+		obj.attachEvent('on'+event,function()
+		{
+			fn.call(obj);
+		}):
+		obj.addEventListener(event,fn,0);
+	}
+
+	function getElementsByClassName(n) { 
+	    var classElements = [],allElements = document.getElementsByTagName('*'); 
+	    for (var i=0; i< allElements.length; i++ ) 
+	    { 
+	        if (allElements[i].className == n ) { 
+	            classElements[classElements.length] = allElements[i]; 
+	        } 
+	    } 
+	    return classElements; 
+	}
+}
+</script>
+</head>
+
+<body>
+	<div class="test">test</div>
+
+<div style="display:none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?63ba884cf404de06c7d8dcc2fc46343e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+</body>
+</html>

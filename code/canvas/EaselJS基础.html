@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>EaselJS基础</title>
+<link href="http://greenzorro.github.io/colacdn/assets/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="http://greenzorro.github.io/colacdn/assets/css/global.css" rel="stylesheet" type="text/css" />
+<script src="http://greenzorro.github.io/colacdn/assets/js/jquery-latest.js"></script>
+<style>
+#wrapper {
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+</style>
+</head>
+
+<body>
+
+<div id="wrapper">
+	<canvas id="test"></canvas>
+</div>
+
+<script src="https://code.createjs.com/easeljs-0.8.0.min.js"></script>
+<script>
+(function () {
+	window.onresize = setCanvas;
+	window.onload = setCanvas;
+	function setCanvas () {
+		var canvas = document.getElementById('test');
+		var paint = canvas.getContext("2d");
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+
+		var stage = new createjs.Stage("test");
+		var circle = new createjs.Shape();
+		circle.graphics.beginFill("#275").drawCircle(0, 0, 50);
+		circle.x = 100;
+		circle.y = 100;
+		stage.addChild(circle);
+		stage.update();
+	}
+})()
+</script>
+
+<div style="display:none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?63ba884cf404de06c7d8dcc2fc46343e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+</body>
+</html>

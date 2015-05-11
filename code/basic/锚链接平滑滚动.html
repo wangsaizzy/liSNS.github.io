@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>锚链接平滑滚动</title>
+<link href="http://greenzorro.github.io/colacdn/assets/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="http://greenzorro.github.io/colacdn/assets/css/global.css" rel="stylesheet" type="text/css" />
+<script src="http://greenzorro.github.io/colacdn/assets/js/jquery-latest.js"></script>
+<style>
+p { clear:both; }
+h1 a { float:left; }
+p a { display:block; width:500px; height:1000px; margin-bottom:10px; background:#dfdfdf; }
+.go_top { display: block; width: 40px; height: 40px; line-height: 40px; background: #eee; text-align: center; color: #333; font-size: 14px; position: fixed; right: 0; top: 70%; }
+</style>
+</head>
+<body>
+<h1>
+    <a href="#a1">a1</a>
+    <a href="#a2">a2</a>
+    <a href="#a3">a3</a>
+</h1>
+<p>
+    <a name="a1">a1</a>
+    <a name="a2">a2</a>
+    <a name="a3">a3</a>
+</p>
+<a class="go_top" href="#">↑</a>
+<script type="text/javascript">
+//	锚链接平滑移动
+	$("a[href*='#']").click(function() {
+		if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+			e.preventDefault();  //防止页面跳动
+			if (this.hash.slice(1).length){
+				var $target = $("[name=" + this.hash.slice(1) + "]");
+				if($target.length){
+					var targetOffset = $target.offset().top;
+					$("html,body").animate({
+						scrollTop: targetOffset
+					},
+					1000);
+				}
+			}
+			else{
+				$("html,body").animate({
+					scrollTop: 0
+				},
+				1000);
+			}
+		}
+	});	
+</script>
+
+<div style="display:none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?63ba884cf404de06c7d8dcc2fc46343e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+</body>
+</html>

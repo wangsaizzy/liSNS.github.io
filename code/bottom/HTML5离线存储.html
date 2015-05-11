@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html manifest='offline.manifest'>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>HTML5离线存储</title>
+<link href="http://greenzorro.github.io/colacdn/assets/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="http://greenzorro.github.io/colacdn/assets/css/global.css" rel="stylesheet" type="text/css" />
+<script src="http://greenzorro.github.io/colacdn/assets/js/jquery-latest.js"></script>
+</head>
+
+<body>
+
+<p>下面有两张图片，缓存了其中一张。可以发现，断网后只有一张图显示出来了。</p>
+<p><img src="http://greenzorro.github.io/colacdn/assets/images/mask.png"></p>
+<p><img src="http://greenzorro.github.io/colacdn/assets/images/photo.jpg"></p>
+
+<div style="display:none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?63ba884cf404de06c7d8dcc2fc46343e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+</body>
+</html>
