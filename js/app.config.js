@@ -1,4 +1,4 @@
-// JavaScript Document
+﻿// JavaScript Document
 define(function(){
 	var data = [
 		{
@@ -20,7 +20,7 @@ define(function(){
 			key : "app",
 			name: '个人作品展示App',
 			desc_s: 'Mobile app, 请在手机模拟器中 或者微信中打开',
-			weblink : "http://htmlpreview.github.io/?https://github.com/AppMoile/AppMobile_Cv/blob/master/AppMobile_Cv/index.html"
+			weblink : "http://tbag.sinaapp.com/"
 		},
 		{
 			id: 4,
