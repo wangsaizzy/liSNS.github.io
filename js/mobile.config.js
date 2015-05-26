@@ -1,4 +1,4 @@
-// JavaScript Document
+﻿// JavaScript Document
 define(function(){
 	var data = [
 		{
@@ -23,7 +23,7 @@ define(function(){
 			pic: '20140930233414.png',
 			name: '汽车主题',
 			desc_s: 'Mobile app, 请在手机模拟器中 或者微信中打开',
-			weblink : "http://htmlpreview.github.io/?https://github.com/liSNS/LearningToWeb/blob/master/Mobile/Mobile_car/index.html"
+			weblink : "http://lisns.sinaapp.com/WebApp/Mobile/car"
 		}
 	];
 	return {config:data};
