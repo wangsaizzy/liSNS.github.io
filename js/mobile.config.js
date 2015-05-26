@@ -7,7 +7,7 @@ define(function(){
 			pic: '20140930233414.png',
 			name: '青年主题',
 			desc_s: 'Mobile app, 请在手机模拟器中 或者微信中打开',
-			weblink : "http://htmlpreview.github.io/?https://github.com/liSNS/LearningToWeb/blob/master/Mobile/yong/demo1.html"
+			weblink : "http://lisns.sinaapp.com/WebApp/Mobile/swiper/1"
 		},
 		{
 			id: 2,
@@ -15,7 +15,7 @@ define(function(){
 			pic: '20140930233414.png',
 			name: '核能信息技术主题沙龙',
 			desc_s: 'Mobile app, 请在手机模拟器中 或者微信中打开',
-			weblink : "http://htmlpreview.github.io/?https://github.com/liSNS/LearningToWeb/blob/master/Mobile/han/index.html"
+			weblink : "http://lisns.sinaapp.com/WebApp/Mobile/salon"
 		},
 		{
 			id: 3,
