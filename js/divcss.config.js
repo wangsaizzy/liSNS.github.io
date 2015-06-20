@@ -1,4 +1,4 @@
-// JavaScript Document
+﻿// JavaScript Document
 define(function(){
 	var data = [
 		
@@ -8,7 +8,7 @@ define(function(){
 			pic: 'pic.png',
 			name: '仿UC官网',
 			desc_s: '兼容IE6，',
-			weblink : "http://lisns.sinaapp.com/PCWebsite/div+css/UC/"
+			weblink : "http://kevin.coding.io/WebPage/DIV+CSS/UC/"
 		},
 		{
 			id : 2,
@@ -16,7 +16,7 @@ define(function(){
 			pic: 'pic.png',
 			name: '仿淘宝官网',
 			desc_s: '兼容IE6，除了圆角border-radius没做兼容',
-			weblink : "http://lisns.sinaapp.com/PCWebsite/div+css/taobao"
+			weblink : "http://kevin.coding.io/WebPage/DIV+CSS/taobao"
 		},
 		{
 			id : 3,
@@ -24,7 +24,7 @@ define(function(){
 			pic: 'pic.png',
 			name: '仿QQ音乐官网',
 			desc_s: '兼容IE6，',
-			weblink : "http://lisns.sinaapp.com/PCWebsite/div+css/QQmusic"
+			weblink : "http://kevin.coding.io/WebPage/DIV+CSS/QQmusic"
 		},
 	];
 	return {config:data};

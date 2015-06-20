@@ -7,7 +7,7 @@ define(function(){
 			pic: '20140930233414.png',
 			name: '青年主题',
 			desc_s: 'Mobile app, 请在手机模拟器中 或者微信中打开',
-			weblink : "http://lisns.sinaapp.com/WebApp/Mobile/swiper/1"
+			weblink : "http://kevin.coding.io/AppMobile/H5Mobile/swiper/1/"
 		},
 		{
 			id: 2,
@@ -15,7 +15,7 @@ define(function(){
 			pic: '20140930233414.png',
 			name: '核能信息技术主题沙龙',
 			desc_s: 'Mobile app, 请在手机模拟器中 或者微信中打开',
-			weblink : "http://lisns.sinaapp.com/WebApp/Mobile/salon"
+			weblink : "http://kevin.coding.io/AppMobile/H5Mobile/salon/"
 		},
 		{
 			id: 3,
@@ -23,7 +23,7 @@ define(function(){
 			pic: '20140930233414.png',
 			name: '汽车主题',
 			desc_s: 'Mobile app, 请在手机模拟器中 或者微信中打开',
-			weblink : "http://lisns.sinaapp.com/WebApp/Mobile/car"
+			weblink : "http://kevin.coding.io/AppMobile/H5Mobile/car/"
 		}
 	];
 	return {config:data};
